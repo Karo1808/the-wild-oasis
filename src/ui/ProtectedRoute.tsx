@@ -12,7 +12,7 @@ const FullPage = styled.div`
   justify-content: center;
 `;
 
-function ProtectedRoute({ children }: React.ReactNode) {
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
 
   // 1. Load the authenticated user

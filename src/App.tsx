@@ -16,7 +16,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import Checkin from "./pages/Checkin";
 import ProtectedRoute from "./ui/ProtectedRoute";
-import RootLayout from "./RootLayout";
 import { DarkModeProvider } from "./context/DarkModeContext";
 
 const queryClient = new QueryClient({

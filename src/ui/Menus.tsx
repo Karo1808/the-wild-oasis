@@ -113,7 +113,7 @@ const Menus = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const Toggle = ({ id }: { id?: number }) => {
+const Toggle = ({ id }: { id?: string }) => {
   const { openId, close, open, setPosition } = useContext(MenusContext);
 
   const handleClick = (e: React.MouseEvent<EventTarget>) => {
@@ -140,7 +140,7 @@ const Toggle = ({ id }: { id?: number }) => {
   );
 };
 
-const List = ({ id, children }: { id?: number; children: React.ReactNode }) => {
+const List = ({ id, children }: { id?: string; children: React.ReactNode }) => {
   const { openId, position, close } = useContext(MenusContext);
   const ref = useCloseModal(close, false);
 

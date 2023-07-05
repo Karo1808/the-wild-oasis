@@ -25,6 +25,8 @@ interface Props {
 function FormRowVertical({ label, error, children }: Props) {
   return (
     <StyledFormRow>
+      {/* // eslint-disable-next-line 
+      // @ts-ignore */}
       {label && <Label htmlFor={children.props.id}>{label}</Label>}
       {children}
       {error && <Error>{error}</Error>}

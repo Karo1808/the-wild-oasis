@@ -6,26 +6,31 @@ import {
 } from "react-icons/hi2";
 import Stat from "./Stat";
 import { formatCurrency } from "../../utils/helpers";
+import { bookingsAfterDate, stayType } from "../../services/apiBookings";
 
 interface Props {
-  bookings?: any;
-  confirmedStays: any;
+  bookings?: bookingsAfterDate[];
+  confirmedStays: stayType[];
   numDays: number;
   cabinCount: number;
 }
 
 const Stats = ({ bookings, confirmedStays, numDays, cabinCount }: Props) => {
-  const numBokings = bookings.length;
+  if (!bookings) return null;
+  const numBokings = bookings.length ?? 0;
 
   const sales = bookings.reduce(
-    (sales: number, booking) => sales + booking.totalPrice,
+    (sales: number, booking: bookingsAfterDate) => sales + booking.totalPrice,
     0
   );
 
   const checkins = confirmedStays.length;
 
   const occupation =
-    confirmedStays.reduce((nights: number, cur) => nights + cur.numNights, 0) /
+    confirmedStays.reduce(
+      (nights: number, cur: stayType) => nights + cur.numNights,
+      0
+    ) /
     (numDays * cabinCount);
 
   return (
@@ -34,7 +39,7 @@ const Stats = ({ bookings, confirmedStays, numDays, cabinCount }: Props) => {
         title="Bookings"
         color="blue"
         icon={<HiOutlineBriefcase />}
-        value={numBokings}
+        value={String(numBokings)}
       />
       <Stat
         title="Sales"
@@ -46,7 +51,7 @@ const Stats = ({ bookings, confirmedStays, numDays, cabinCount }: Props) => {
         title="Check ins"
         color="indigo"
         icon={<HiOutlineCalendarDays />}
-        value={checkins}
+        value={String(checkins)}
       />
       <Stat
         title="Occupancy rate"

@@ -5,6 +5,8 @@ import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import { useSearchParams } from "react-router-dom";
 import Empty from "../../ui/Empty";
+import { BookingType } from "../bookings/BookingType";
+import BookingRow from "../bookings/BookingRow";
 
 interface CabinData {
   name: string;
@@ -13,7 +15,8 @@ interface CabinData {
   discount: number;
   image: string;
   description: string;
-  id?: number;
+  id?: string;
+  [key: string]: any;
 }
 
 const CabinTable = () => {
@@ -55,9 +58,15 @@ const CabinTable = () => {
 
         <Table.Body
           data={sortedCabins}
-          render={(cabin: CabinData): JSX.Element => (
-            <CabinRow cabin={cabin} key={cabin.id} />
-          )}
+          render={(item: CabinData | BookingType): JSX.Element => {
+            if ("name" in item) {
+              const cabin = item as CabinData;
+              return <CabinRow cabin={cabin} key={cabin.id} />;
+            } else {
+              const booking = item as BookingType;
+              return <BookingRow booking={booking} key={booking.id} />;
+            }
+          }}
         />
       </Table>
     </Menus>

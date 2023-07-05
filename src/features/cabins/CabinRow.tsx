@@ -49,7 +49,7 @@ const Discount = styled.div`
 `;
 
 interface CabinIn {
-  id?: number;
+  id?: string;
   name: string;
   maxCapacity: number;
   regularPrice: number;
@@ -63,7 +63,7 @@ interface Props {
 }
 
 const CabinRow = ({ cabin }: Props) => {
-  const { isCreating, createCabin } = useCreateCabin();
+  const { createCabin } = useCreateCabin();
 
   const {
     id: cabinID,
@@ -78,7 +78,7 @@ const CabinRow = ({ cabin }: Props) => {
   const { isDeleting, deleteCabin } = useDeleteCabin();
 
   const handleDelete = () => {
-    deleteCabin(cabinID || 0);
+    deleteCabin(cabinID || null);
   };
   const handleDuplicate = () => {
     createCabin({

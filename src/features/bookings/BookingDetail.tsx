@@ -36,7 +36,7 @@ function BookingDetail() {
 
   const { status } = booking;
 
-  const statusToTagName = {
+  const statusToTagName: { [key: string]: string } = {
     unconfirmed: "blue",
     "checked-in": "green",
     "checked-out": "silver",

@@ -9,6 +9,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ErrorBoundary
       onReset={() => window.location.replace("/")}
+      // eslint-disable-next-line
+      // @ts-ignore
       FallbackComponent={<ErrorFallback />}
     >
       <App />

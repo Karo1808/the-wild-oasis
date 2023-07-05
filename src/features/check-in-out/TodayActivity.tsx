@@ -5,6 +5,7 @@ import Row from "../../ui/Row";
 import { useTodayActivity } from "./useTodayActivity";
 import Spinner from "../../ui/Spinner";
 import TodayItem from "./TodayItem";
+import { stayType } from "../../services/apiBookings";
 
 const StyledToday = styled.div`
   /* Box */
@@ -41,6 +42,7 @@ const NoActivity = styled.p`
 
 function TodayActivity() {
   const { activities, isLoading } = useTodayActivity();
+  if (!activities) return <p>No activities today</p>;
   return (
     <StyledToday>
       <Row type="horizontal">
@@ -49,7 +51,7 @@ function TodayActivity() {
       {!isLoading ? (
         activities?.length > 0 ? (
           <TodayList>
-            {activities.map((activity) => (
+            {activities.map((activity: stayType) => (
               <TodayItem activity={activity} key={activity.id} />
             ))}
           </TodayList>

@@ -1,5 +1,5 @@
 export interface BookingType {
-  id: number;
+  id: string;
   created_at: Date;
   startDate: Date;
   endDate: Date;

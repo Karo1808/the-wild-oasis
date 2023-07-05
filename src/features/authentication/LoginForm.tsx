@@ -5,8 +5,6 @@ import Input from "../../ui/Input";
 import FormRowVertical from "../../ui/FormRowVertical";
 import { useLogin } from "./useLogin";
 import SpinnerMini from "../../ui/SpinnerMini";
-import { useUser } from "./useUser";
-import { Navigate } from "react-router-dom";
 
 function LoginForm() {
   const [email, setEmail] = useState("wild_oasis_admin@example.com");

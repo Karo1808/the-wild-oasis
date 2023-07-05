@@ -15,7 +15,6 @@ import Checkbox from "../../ui/Checkbox";
 import { formatCurrency } from "../../utils/helpers";
 import { useCheckIn } from "./useCheckIn";
 import { useSettings } from "../settings/useSettings";
-import { add } from "date-fns";
 
 const Box = styled.div`
   /* Box */
@@ -33,7 +32,9 @@ function CheckinBooking() {
   const { checkIn, isCheckingIn } = useCheckIn();
   const { settings, isLoadingSettings } = useSettings();
 
-  useEffect(() => setConfirmPaid(booking?.isPaid), [booking]);
+  useEffect(() => {
+    if (booking) setConfirmPaid(booking.isPaid);
+  }, [booking]);
 
   if (!booking) return null;
   if (!settings) return null;
@@ -41,6 +42,8 @@ function CheckinBooking() {
 
   const optionalBreakfastPrice =
     settings?.breakfastPrice * booking.numNights * booking.numGuests;
+
+  const totalPrice = booking?.totalPrice ?? 0;
 
   function handleCheckin() {
     if (!confirmPaid) return;
@@ -50,7 +53,7 @@ function CheckinBooking() {
         breakfast: {
           hasBreakfast: true,
           extrasPrice: optionalBreakfastPrice,
-          totalPrice: booking?.totalPrice + optionalBreakfastPrice,
+          totalPrice: totalPrice + optionalBreakfastPrice,
         },
       });
     } else {
@@ -102,8 +105,10 @@ function CheckinBooking() {
         >
           I confirm that {booking.guests.fullName} has paid the total amount of{" "}
           {!addBreakfast
-            ? formatCurrency(booking.totalPrice)
-            : formatCurrency(booking.totalPrice + optionalBreakfastPrice)}
+            ? formatCurrency(booking.totalPrice ?? 0)
+            : formatCurrency(
+                (booking.totalPrice ?? 0) + optionalBreakfastPrice
+              )}
         </Checkbox>
       </Box>
 

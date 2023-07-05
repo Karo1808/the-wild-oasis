@@ -9,6 +9,7 @@ import {
   Tooltip,
 } from "recharts";
 import { useDarkMode } from "../../context/DarkModeContext";
+import { stayType } from "../../services/apiBookings";
 
 const ChartBox = styled.div`
   /* Box */
@@ -114,11 +115,11 @@ const startDataDark = [
   },
 ];
 
-function prepareData(startData, stays) {
+function prepareData(startData: startDataType[], stays: stayType[]) {
   // A bit ugly code, but sometimes this is what it takes when working with real data 😅
 
-  function incArrayValue(arr, field) {
-    return arr.map((obj) =>
+  function incArrayValue(arr: startDataType[], field: string) {
+    return arr.map((obj: startDataType) =>
       obj.duration === field ? { ...obj, value: obj.value + 1 } : obj
     );
   }
@@ -136,19 +137,26 @@ function prepareData(startData, stays) {
       if (num >= 21) return incArrayValue(arr, "21+ nights");
       return arr;
     }, startData)
-    .filter((obj) => obj.value > 0);
+    .filter((obj: startDataType) => obj.value > 0);
 
   return data;
 }
 
+interface startDataType {
+  duration: string;
+  value: number;
+  color: string;
+}
+
 interface Props {
-  confirmedStays: any;
+  confirmedStays: stayType[];
 }
 
 const DurationChart = ({ confirmedStays }: Props) => {
   const { isDarkMode } = useDarkMode();
   const startData = isDarkMode ? startDataDark : startDataLight;
   const data = prepareData(startData, confirmedStays);
+  console.log(data);
 
   return (
     <ChartBox>
@@ -165,7 +173,7 @@ const DurationChart = ({ confirmedStays }: Props) => {
             cy="50%"
             paddingAngle={3}
           >
-            {data.map((entry) => (
+            {data.map((entry: startDataType) => (
               <Cell
                 fill={entry.color}
                 stroke={entry.color}
@@ -177,6 +185,8 @@ const DurationChart = ({ confirmedStays }: Props) => {
           <Legend
             verticalAlign="middle"
             align="right"
+            // eslint-disable-next-line
+            // @ts-ignore
             width={"30%"}
             layout="vertical"
             iconSize={15}

@@ -19,14 +19,13 @@ const DashboardLayout = () => {
   const { bookings, isLoading: isLoading1 } = useRecentBookings();
 
   const {
-    stays,
-    confirmedStays,
+    confirmedStays = [],
     isLoading: isLoading2,
     numDays,
   } = useRecentStays();
 
   const { cabins, isLoading: isLoading3 } = useCabins();
-  if (cabins === null) return;
+  if (!bookings) return <p>No bookings could be found</p>;
   if (isLoading1 || isLoading2 || isLoading3) return <Spinner />;
 
   return (
@@ -35,7 +34,7 @@ const DashboardLayout = () => {
         bookings={bookings}
         confirmedStays={confirmedStays}
         numDays={numDays}
-        cabinCount={cabins.length}
+        cabinCount={cabins?.length ?? 0}
       />
       <TodayActivity />
       <DurationChart confirmedStays={confirmedStays} />

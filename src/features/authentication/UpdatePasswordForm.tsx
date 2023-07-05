@@ -23,7 +23,7 @@ function UpdatePasswordForm() {
   }: {
     password: string;
   }) => {
-    updateUser({ password }, { onSuccess: reset() });
+    updateUser({ password }, { onSuccess: () => reset() });
   };
 
   return (

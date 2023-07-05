@@ -24,7 +24,14 @@ const Buttons = styled.div`
   gap: 0.6rem;
 `;
 
-const PaginationButton = styled.button`
+interface PaginationButtonProps {
+  active?: boolean;
+  onClick?: () => void;
+  disabled: boolean;
+  as: string;
+}
+
+const PaginationButton = styled.button<PaginationButtonProps>`
   background-color: ${(props) =>
     props.active ? " var(--color-brand-600)" : "var(--color-grey-50)"};
   color: ${(props) => (props.active ? " var(--color-brand-50)" : "inherit")};
@@ -101,10 +108,15 @@ const Pagination = ({ count }: PaginationProps) => {
         of <span>{count}</span> results
       </P>
       <Buttons>
-        <PaginationButton onClick={previousPage} disabled={currentPage === 1}>
+        <PaginationButton
+          as="button"
+          onClick={previousPage}
+          disabled={currentPage === 1}
+        >
           <HiChevronLeft /> <span>Previous</span>
         </PaginationButton>
         <PaginationButton
+          as="button"
           onClick={nextPage}
           disabled={currentPage === pageCount}
         >

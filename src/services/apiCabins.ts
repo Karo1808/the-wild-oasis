@@ -1,22 +1,22 @@
 import supabase, { supabaseUrl } from "./supabase.ts";
 
-interface Cabin {
+export interface Cabin {
   name: string;
   maxCapacity: number;
   regularPrice: number;
   discount: number;
   image: string;
-  id?: number;
+  id?: string;
   description: string;
 }
 
-interface newCabin {
+export interface newCabin {
   name: string;
   maxCapacity: number;
   regularPrice: number;
   discount: number;
   image: File | string;
-  id?: number;
+  id?: string;
   description: string;
   imageURL?: FileList;
 }
@@ -34,7 +34,7 @@ export const getCabins = async (): Promise<Cabin[] | null> => {
 
 export const createEditCabin = async (
   newCabin: newCabin,
-  id?: number
+  id?: string
 ): Promise<Cabin | null> => {
   const hasImagePath = typeof newCabin.image === "string";
 
@@ -90,7 +90,9 @@ export const createEditCabin = async (
   return data;
 };
 
-export const deleteCabin = async (id: number): Promise<Cabin[] | null> => {
+export const deleteCabin = async (
+  id: string | null
+): Promise<Cabin[] | null> => {
   try {
     if (id === null) throw new Error("ID does not exist");
 

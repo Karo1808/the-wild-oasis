@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 interface Props {
   type?: string;
-  onSubmit?: () => void;
+  onSubmit?: (e: React.ChangeEvent) => void;
 }
 
 const Form = styled.form<Props>`

@@ -22,7 +22,7 @@ interface Submit {
 
 interface CreateCabinFormProps {
   cabinToEdit?: {
-    id?: number;
+    id?: string;
     name: string;
     maxCapacity: number;
     regularPrice: number;

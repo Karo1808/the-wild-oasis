@@ -84,24 +84,13 @@ interface CabinData {
   discount: number;
   image: string;
   description: string;
-  id?: number;
+  id?: string;
 }
 
 interface TableBodyProps {
-  data?:
-    | {
-        name: string;
-        maxCapacity: number;
-        regularPrice: number;
-        discount: number;
-        image: string;
-        description: string;
-        id?: number;
-      }[]
-    | BookingType[];
+  data?: (CabinData | BookingType)[];
   render: (item: CabinData | BookingType) => JSX.Element;
 }
-
 const TableContext = createContext<TableContextType>({});
 
 const Table = ({ columns, children }: TableProps) => {
@@ -130,7 +119,7 @@ const Row = ({ children }: TableProps) => {
 };
 const Body = ({ data, render }: TableBodyProps) => {
   if (!data?.length) return <Empty>No data to show at the moment</Empty>;
-  return <StyledBody>{data?.map(render)}</StyledBody>;
+  return <StyledBody>{data.map((item) => render(item))}</StyledBody>;
 };
 
 Table.Header = Header;

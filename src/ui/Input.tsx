@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import styled from "styled-components";
 
 interface InputProps {
-  type: string;
+  type?: string;
   id: string;
   defaultValue?: number;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;

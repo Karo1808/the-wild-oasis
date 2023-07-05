@@ -4,6 +4,7 @@ import { Flag } from "../../ui/Flag";
 import Button from "../../ui/Button";
 import { Link } from "react-router-dom";
 import CheckoutButton from "./CheckoutButton";
+import { stayType } from "../../services/apiBookings";
 
 const StyledTodayItem = styled.li`
   display: grid;
@@ -24,7 +25,7 @@ const Guest = styled.div`
   font-weight: 500;
 `;
 
-const TodayItem = ({ activity }) => {
+const TodayItem = ({ activity }: { activity: stayType }) => {
   const { id, status, guests, numNights } = activity;
   return (
     <StyledTodayItem>

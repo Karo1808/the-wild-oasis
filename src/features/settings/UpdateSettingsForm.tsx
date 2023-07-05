@@ -7,14 +7,14 @@ import Input from "../../ui/Input";
 import Spinner from "../../ui/Spinner";
 
 const UpdateSettingsForm = () => {
-  const { isLoading, settings } = useSettings();
+  const { isLoadingSettings, settings } = useSettings();
   const {
     minBookingLength,
     maxBookingLength,
     maxGuestsPerBooking,
     breakfastPrice,
   } = settings || {};
-  const { isUpdating, updateSetting } = useUpdateSetting();
+  const { updateSetting } = useUpdateSetting();
 
   const handleUpdate = (
     e: React.FocusEvent<HTMLInputElement>,
@@ -27,7 +27,7 @@ const UpdateSettingsForm = () => {
     updateSetting({ [name]: value });
   };
 
-  if (isLoading) return <Spinner />;
+  if (isLoadingSettings) return <Spinner />;
 
   return (
     <Form>

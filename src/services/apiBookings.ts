@@ -57,13 +57,14 @@ export const getBookings = async ({
     console.error(error);
     throw new Error("Cabins could not be loaded");
   }
-
+  // eslint-disable-next-line
+  //@ts-ignore
   return data;
 };
 
 interface getAllBookingParams {
   filter: {
-    field: string;
+    field: string | null;
     value: string;
   };
 }
@@ -77,7 +78,9 @@ export const getAllBookings = async ({
       "id, created_at, startDate, endDate, numNights, numGuests, status, totalPrice , cabins(name), guests(fullName, email)"
     );
 
-  if (filter !== null) query = query.eq(filter.field, filter.value);
+  if (filter && filter.field !== null) {
+    query = query.eq(filter.field, filter.value);
+  }
 
   const { data, error } = await query;
 
@@ -85,11 +88,12 @@ export const getAllBookings = async ({
     console.error(error);
     throw new Error("Cabins could not be loaded");
   }
-
+  // eslint-disable-next-line
+  //@ts-ignore
   return data;
 };
 
-interface SingleBookingType {
+export interface SingleBookingType {
   id: string;
   created_at: Date;
   startDate: Date;
@@ -130,8 +134,16 @@ export async function getBooking(id?: string): Promise<SingleBookingType> {
   return data;
 }
 
+export interface bookingsAfterDate {
+  created_at: string;
+  extrasPrice: number;
+  totalPrice: number;
+}
+
 // Returns all BOOKINGS that are were created after the given date. Useful to get bookings created in the last 30 days, for example.
-export async function getBookingsAfterDate(date: string) {
+export async function getBookingsAfterDate(
+  date: string
+): Promise<bookingsAfterDate[]> {
   console.log("test");
   const today = getToday({ end: true }); // Get today's date as a Date object
 
@@ -149,8 +161,32 @@ export async function getBookingsAfterDate(date: string) {
   return data;
 }
 
+export interface stayType {
+  id: string;
+  created_at: string;
+  startDate: string;
+  endDate: string;
+  numNights: number;
+  numGuests: number;
+  cabinPrice: number;
+  extrasPrice: number;
+  totalPrice: number;
+  hasBreakfast: boolean;
+  observations: string;
+  isPaid: boolean;
+  status: string;
+  cabinId: string;
+  guests: {
+    fullName: string;
+    email: string;
+    country: string;
+    countryFlag: string;
+    nationalID: string;
+  };
+}
+
 // Returns all STAYS that are were created after the given date
-export async function getStaysAfterDate(date: string) {
+export async function getStaysAfterDate(date: string): Promise<stayType[]> {
   console.log("test");
   const { data, error } = await supabase
     .from("bookings")
@@ -163,11 +199,13 @@ export async function getStaysAfterDate(date: string) {
     throw new Error("Bookings could not get loaded");
   }
 
+  console.log(data);
+
   return data;
 }
 
 // Activity means that there is a check in or a check out today
-export async function getStaysTodayActivity() {
+export async function getStaysTodayActivity(): Promise<stayType[]> {
   const { data, error } = await supabase
     .from("bookings")
     .select("*, guests(fullName, nationality, countryFlag)")
@@ -184,10 +222,12 @@ export async function getStaysTodayActivity() {
     console.error(error);
     throw new Error("Bookings could not get loaded");
   }
+
+  console.log(data);
   return data;
 }
 
-interface updateBookingType {
+export interface updateBookingType {
   id?: string;
   created_at?: Date;
   startDate?: Date;
@@ -200,11 +240,12 @@ interface updateBookingType {
   hasBreakfast?: boolean;
   observations?: string;
   isPaid?: boolean;
+  status?: string;
 }
 
 export async function updateBooking(
-  id: string,
-  obj: updateBookingType
+  obj: updateBookingType,
+  id?: string
 ): Promise<SingleBookingType> {
   const { data, error } = await supabase
     .from("bookings")
@@ -221,7 +262,7 @@ export async function updateBooking(
 }
 
 export async function deleteSingleBooking(
-  id: string
+  id?: string
 ): Promise<SingleBookingType | null> {
   // REMEMBER RLS POLICIES
   const { data, error } = await supabase.from("bookings").delete().eq("id", id);

@@ -12,6 +12,7 @@ import {
 } from "recharts";
 import { useDarkMode } from "../../context/DarkModeContext";
 import { eachDayOfInterval, format, isSameDay, subDays } from "date-fns";
+import { bookingsAfterDate } from "../../services/apiBookings";
 
 const StyledSalesChart = styled(DashboardBox)`
   grid-column: 1 / -1;
@@ -56,15 +57,15 @@ const fakeData = [
 ];
 
 interface Props {
-  bookings: any;
+  bookings: bookingsAfterDate[];
   numDays: number;
 }
 
-const SalesChart = ({ bookings, numDays }): Props => {
+const SalesChart = ({ bookings, numDays = 7 }: Props) => {
   const { isDarkMode } = useDarkMode();
 
   const allDates = eachDayOfInterval({
-    start: subDays(new Date(), numDays - 1),
+    start: subDays(new Date(), numDays - 1 ?? 7),
     end: new Date(),
   });
 
@@ -72,11 +73,21 @@ const SalesChart = ({ bookings, numDays }): Props => {
     return {
       label: format(date, "MMM dd"),
       totalSales: bookings
-        .filter((booking) => isSameDay(date, new Date(booking.created_at)))
-        .reduce((acc: number, cur) => acc + cur.totalPrice, 0),
+        .filter((booking: bookingsAfterDate) =>
+          isSameDay(date, new Date(booking.created_at))
+        )
+        .reduce(
+          (acc: number, cur: bookingsAfterDate) => acc + cur.totalPrice,
+          0
+        ),
       extrasSales: bookings
-        .filter((booking) => isSameDay(date, new Date(booking.created_at)))
-        .reduce((acc: number, cur) => acc + cur.extrasPrice, 0),
+        .filter((booking: bookingsAfterDate) =>
+          isSameDay(date, new Date(booking.created_at))
+        )
+        .reduce(
+          (acc: number, cur: bookingsAfterDate) => acc + cur.extrasPrice,
+          0
+        ),
     };
   });
 
@@ -97,7 +108,12 @@ const SalesChart = ({ bookings, numDays }): Props => {
   return (
     <StyledSalesChart>
       <Heading as="h2">
-        Sales from {format(allDates.at(0), "MMM dd yyy")} &mdash;{" "}
+        Sales from
+        {/* // eslint-disable-next-line 
+        // @ts-ignore */}
+        {format(allDates.at(0), "MMM dd yyy")} &mdash;{" "}
+        {/* // eslint-disable-next-line 
+        // @ts-ignore */}
         {format(allDates.at(-1), "MMM dd yyy")}
       </Heading>
 
