@@ -199,8 +199,6 @@ export async function getStaysAfterDate(date: string): Promise<stayType[]> {
     throw new Error("Bookings could not get loaded");
   }
 
-  console.log(data);
-
   return data;
 }
 
@@ -223,7 +221,6 @@ export async function getStaysTodayActivity(): Promise<stayType[]> {
     throw new Error("Bookings could not get loaded");
   }
 
-  console.log(data);
   return data;
 }
 
@@ -244,13 +241,14 @@ export interface updateBookingType {
 }
 
 export async function updateBooking(
-  obj: updateBookingType,
-  id?: string
+  id: string,
+  obj: updateBookingType
 ): Promise<SingleBookingType> {
+  console.log(id);
   const { data, error } = await supabase
     .from("bookings")
     .update(obj)
-    .eq("id", id)
+    .eq("id", Number(id))
     .select()
     .single();
 
