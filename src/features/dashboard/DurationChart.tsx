@@ -184,7 +184,7 @@ const DurationChart = ({ confirmedStays }: Props) => {
           <Legend
             verticalAlign="middle"
             align="right"
-            width={30}
+            width={140}
             layout="vertical"
             iconSize={15}
             iconType="circle"
