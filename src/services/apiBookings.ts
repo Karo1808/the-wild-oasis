@@ -20,8 +20,8 @@ interface getBookingsParams {
   filter: {
     field: string;
     value: string;
-  };
-  sortBy: string;
+  } | null;
+  sortBy: string | null;
   currentPage: number;
 }
 
@@ -57,8 +57,7 @@ export const getBookings = async ({
     console.error(error);
     throw new Error("Cabins could not be loaded");
   }
-  // eslint-disable-next-line
-  //@ts-ignore
+
   return data;
 };
 
@@ -66,7 +65,7 @@ interface getAllBookingParams {
   filter: {
     field: string | null;
     value: string;
-  };
+  } | null;
 }
 
 export const getAllBookings = async ({
@@ -88,8 +87,7 @@ export const getAllBookings = async ({
     console.error(error);
     throw new Error("Cabins could not be loaded");
   }
-  // eslint-disable-next-line
-  //@ts-ignore
+
   return data;
 };
 
@@ -241,7 +239,7 @@ export interface updateBookingType {
 }
 
 export async function updateBooking(
-  id: string,
+  id: string | undefined,
   obj: updateBookingType
 ): Promise<SingleBookingType> {
   console.log(id);

@@ -18,8 +18,6 @@ export const useCheckIn = () => {
         totalPrice?: number;
       };
     }) =>
-      // eslint-disable-next-line
-      // @ts-ignore
       updateBooking(bookingId, {
         status: "checked-in",
         isPaid: true,

@@ -184,9 +184,7 @@ const DurationChart = ({ confirmedStays }: Props) => {
           <Legend
             verticalAlign="middle"
             align="right"
-            // eslint-disable-next-line
-            // @ts-ignore
-            width={"30%"}
+            width={30}
             layout="vertical"
             iconSize={15}
             iconType="circle"

@@ -8,10 +8,10 @@ export interface BookingType {
   status: string;
   totalPrice: number;
   cabins: {
-    name: string;
-  };
+    name: any;
+  }[];
   guests: {
-    fullName: string;
-    email: string;
-  };
+    fullName: any;
+    email: any;
+  }[];
 }

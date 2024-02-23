@@ -5,8 +5,6 @@ import { updateCurrentUser } from "../../services/apiAuth";
 export const useUpdateUser = () => {
   const queryClient = useQueryClient();
   const { isLoading: isUpdating, mutate: updateUser } = useMutation({
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     mutationFn: updateCurrentUser,
     onSuccess: () => {
       toast.success("User account successfully updated");

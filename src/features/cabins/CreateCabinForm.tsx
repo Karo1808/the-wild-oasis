@@ -53,8 +53,6 @@ function CreateCabinForm({ cabinToEdit, onCloseModal }: CreateCabinFormProps) {
     const image = !data.imageURL.length ? data.image : data.imageURL[0];
     if (isEditSession)
       editCabin(
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         { newCabinData: { ...data, image }, id: editId },
         {
           onSuccess: () => {

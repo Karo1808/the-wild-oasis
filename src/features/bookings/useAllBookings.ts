@@ -13,8 +13,7 @@ export const useAllBookings = () => {
 
   const { isLoading, data: allBookings } = useQuery({
     queryKey: ["bookings", filter],
-    // eslint-disable-next-line
-    //@ts-ignore
+
     queryFn: () => getAllBookings({ filter }),
   });
   return { allBookings, isLoading };

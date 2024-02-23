@@ -74,9 +74,7 @@ export const createEditCabin = async (
     .from("cabin-images")
     .upload(imageName, newCabinUpdated.image);
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  if (storageError?.statusCode !== "400" && storageError) {
+  if (storageError) {
     await supabase
       .from("cabins")
       .delete()

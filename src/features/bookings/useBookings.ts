@@ -24,8 +24,7 @@ export const useBookings = (count: number) => {
 
   const { isLoading, data: bookings } = useQuery({
     queryKey: ["bookings", filter, sortBy, currentPage],
-    // eslint-disable-next-line
-    //@ts-ignore
+
     queryFn: () => getBookings({ filter, sortBy, currentPage }),
   });
 
@@ -35,8 +34,6 @@ export const useBookings = (count: number) => {
     queryClient.prefetchQuery({
       queryKey: ["bookings", filter, sortBy, currentPage + 1],
       queryFn: () =>
-        // eslint-disable-next-line
-        //@ts-ignore
         getBookings({ filter, sortBy, currentPage: currentPage + 1 }),
     });
 
@@ -44,8 +41,6 @@ export const useBookings = (count: number) => {
     queryClient.prefetchQuery({
       queryKey: ["bookings", filter, sortBy, currentPage - 1],
       queryFn: () =>
-        // eslint-disable-next-line
-        //@ts-ignore
         getBookings({ filter, sortBy, currentPage: currentPage - 1 }),
     });
 

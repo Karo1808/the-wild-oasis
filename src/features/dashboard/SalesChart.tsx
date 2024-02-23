@@ -109,12 +109,8 @@ const SalesChart = ({ bookings, numDays = 7 }: Props) => {
     <StyledSalesChart>
       <Heading as="h2">
         Sales from
-        {/* // eslint-disable-next-line 
-        // @ts-ignore */}
-        {format(allDates.at(0), "MMM dd yyy")} &mdash;{" "}
-        {/* // eslint-disable-next-line 
-        // @ts-ignore */}
-        {format(allDates.at(-1), "MMM dd yyy")}
+        {format(allDates.at(0) ?? new Date(), "MMM dd yyy")} &mdash;{" "}
+        {format(allDates.at(-1) ?? new Date(), "MMM dd yyy")}
       </Heading>
 
       <ResponsiveContainer height={300} width="100%">
