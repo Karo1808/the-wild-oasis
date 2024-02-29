@@ -55,11 +55,11 @@ VITE_SUPABASE_URL=
 
 Utwórz tabele w supabase
 
-![](./assets/tables.png)
+![Tabele](./assets/tables.png)
 
 Zezwól na zabezpieczenia na poziomie wiersza na podstawie obraka poniżej
 
-![p](./assets/rls.png)
+![RLS](./assets/rls.png)
 
 Utwórz kubełki przechowywania w Supabase
 

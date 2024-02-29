@@ -55,10 +55,10 @@ VITE_SUPABASE_URL=
 
 Create tables in supabase with this structure
 
-![](./assets/tables.png)
+![Tables](./assets/tables.png)
 
 Enable row level security based on the image below
-![](./assets/rls.png)
+![RLS](./assets/rls.png)
 
 Create storage buckets in supabase
 
