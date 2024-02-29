@@ -1,6 +1,6 @@
 # The Wild Oasis
 
-[![pl](https://img.shields.io/badge/lang-pl-red.svg)](https://github.com/YourUsername/the-wild-oasis/blob/master/README.pl.md)
+[![pl](https://img.shields.io/badge/lang-pl-red.svg)](https://github.com/Karo1808/the-wild-oasis/blob/master/README.pl.md)
 
 ### Opis
 
