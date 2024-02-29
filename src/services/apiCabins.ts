@@ -1,4 +1,4 @@
-import supabase, { supabaseUrl } from "./supabase.ts";
+import supabase from "./supabase.ts";
 
 export interface Cabin {
   name: string;
@@ -47,7 +47,9 @@ export const createEditCabin = async (
 
   const imagePath = hasImagePath
     ? newCabinUpdated.image
-    : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
+    : `${
+        import.meta.env.VITE_SUPABASE_URL
+      }/storage/v1/object/public/cabin-images/${imageName}`;
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
