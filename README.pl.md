@@ -59,7 +59,7 @@ Utwórz tabele w supabase
 
 Zezwól na zabezpieczenia na poziomie wiersza na podstawie obraka poniżej
 
-![](./assets/rls.png)
+![p](./assets/rls.png)
 
 Utwórz kubełki przechowywania w Supabase
 
