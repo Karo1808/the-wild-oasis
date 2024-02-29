@@ -10,7 +10,7 @@ Została zbudowana w ramach [kursu](https://www.udemy.com/course/the-ultimate-re
 
 ### Demo
 
-[Link do strony](https://the-wild-oasis-ts.vercel.app/)
+[Link do strony](https://the-wild-oasis-gamma.vercel.app)
 
 ### Funkcje
 

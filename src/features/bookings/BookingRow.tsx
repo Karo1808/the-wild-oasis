@@ -69,7 +69,11 @@ function BookingRow({
     "checked-out": "silver",
   };
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const { fullName: guestName, email } = guests;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const { name: cabinName } = cabins;
   const startDateStr = String(startDate.toString());
 
