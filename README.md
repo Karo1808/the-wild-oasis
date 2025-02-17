@@ -8,10 +8,6 @@ This web application serves as a dashboard for a fictional hotel. It allows mult
 
 It was built as part of a [course](https://www.udemy.com/course/the-ultimate-react-course/?couponCode=ST22FS22724) and modified using TypeScript
 
-### Demo
-
-[Website link](https://the-wild-oasis-gamma.vercel.app)
-
 ### Features
 
 - User Management: Admin users can create and manage user accounts for staff members.
